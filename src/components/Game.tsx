@@ -6,10 +6,10 @@ import Playground from "./Playground";
 export interface Props {
 }
 
-const Snake: StatelessComponent<Props> = (props: Props): ReactElement<Props> => (
+const Game: StatelessComponent<Props> = (props: Props): ReactElement<Props> => (
     <div>
         <ScoreBoard score={0}/>
-        <Playground/>
+        <Playground columns={20} rows={10}/>
     </div>
 );
-export default Snake;
+export default Game;

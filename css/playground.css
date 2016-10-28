@@ -1,0 +1,14 @@
+.playground .cell {
+    height: 40px;
+    width: 40px;
+}
+
+.playground .cell.empty {
+    background-color: lightgray;
+}
+.playground .cell.snake {
+    background-color: darkgreen;
+}
+.playground .cell.food {
+    background-color: coral;
+}

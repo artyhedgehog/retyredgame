@@ -1,7 +1,7 @@
 import {SnakeReducer, FoodReducer, ScoreReducer} from './reducers';
 import {ReducersMapObject} from "redux";
 
-interface Point {
+export interface Point {
     x: number,
     y: number,
 }
