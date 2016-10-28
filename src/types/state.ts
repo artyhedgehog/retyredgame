@@ -1,10 +1,6 @@
 import {SnakeReducer, FoodReducer, ScoreReducer} from './reducers';
-import {ReducersMapObject} from "redux";
-
-export interface Point {
-    x: number,
-    y: number,
-}
+import {ReducersMapObject} from 'redux';
+import {Point} from './models';
 
 export type SnakeState = Point[];
 export type FoodState = Point;

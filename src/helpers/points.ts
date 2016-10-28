@@ -1,4 +1,4 @@
-import {Point} from '../types/state';
+import {Point, Movement} from '../types/models';
 
 export const samePoint = (one: Point, another: Point): boolean => (
     one.x === another.x && one.y === another.y
@@ -19,3 +19,11 @@ export const includesPoint = (pointsList: Point[], soughtPoint: Point): boolean 
     }
     return false;
 };
+export const getMovement = (from: Point, to: Point): Movement => ({
+    dX: to.x - from.x,
+    dY: to.y - from.y,
+});
+export const applyMovement = (from: Point, move: Movement): Point => ({
+    x: from.x + move.dX,
+    y: from.y + move.dY,
+});

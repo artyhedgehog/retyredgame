@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ReactElement, StatelessComponent} from '@types/react';
-import ScoreBoard from "./ScoreBoard";
-import Playground from "./Playground";
+import ScoreBoard from './ScoreBoard';
+import Playground from './Playground';
 
 export interface Props {
 }

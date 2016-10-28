@@ -1,8 +1,9 @@
 import * as React from 'react';
 import {ReactElement, StatelessComponent} from '@types/react';
 import {connect, MapStateToProps} from 'react-redux';
-import {AppState, Point} from '../types/state';
+import {AppState} from '../types/state';
 import {samePoint, includesPoint} from '../helpers/points';
+import {Point} from '../types/models';
 
 export enum Type {Empty, Snake, Food}
 export interface Props extends Point {
