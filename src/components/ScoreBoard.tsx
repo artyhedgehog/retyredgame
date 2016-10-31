@@ -1,8 +1,16 @@
 import * as React from 'react';
 import {ReactElement, StatelessComponent} from '@types/react';
+import {connect} from 'react-redux';
 
-export interface Props {
+import {AppState} from '../types/state';
+
+
+interface StateProps {
     score: number,
+}
+interface OwnProps {
+}
+export interface Props extends StateProps, OwnProps {
 }
 
 const ScoreBoard: StatelessComponent<Props> =
@@ -14,4 +22,7 @@ const ScoreBoard: StatelessComponent<Props> =
 ScoreBoard.propTypes = {
     score: React.PropTypes.number.isRequired,
 };
-export default ScoreBoard;
+const mapStateToProps = (state: AppState): StateProps => ({
+    score: state.score,
+});
+export default connect<StateProps, {}, OwnProps>(mapStateToProps)(ScoreBoard);

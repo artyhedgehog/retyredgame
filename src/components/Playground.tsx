@@ -1,16 +1,21 @@
 import * as React from 'react';
 import {ReactElement, StatelessComponent} from '@types/react';
-import PlaygroundRow, {Props as RowProps} from './PlaygroundRow';
-import {connect, ActionCreator, MapDispatchToPropsObject} from 'react-redux';
-import {crawl, up, down, left, right} from '../actionCreators/snake';
 import {Action} from 'redux';
+import {connect, ActionCreator, MapDispatchToPropsObject} from 'react-redux';
+
+import PlaygroundRow, {Props as RowProps} from './PlaygroundRow';
+import {crawl, up, down, left, right} from '../actionCreators/snake';
+import {SnakeCrawlAction, SnakeTurnAction} from '../types/actions';
+import {score} from '../actionCreators/score';
+
 
 interface MappedDispatchProps {
-    onCrawlButtonPressed: ActionCreator<Action>,
-    onUpButtonPressed: ActionCreator<Action>,
-    onDownButtonPressed: ActionCreator<Action>,
-    onLeftButtonPressed: ActionCreator<Action>,
-    onRightButtonPressed: ActionCreator<Action>,
+    onScoreButtonPressed: ActionCreator<Action>,
+    onCrawlButtonPressed: ActionCreator<SnakeCrawlAction>,
+    onUpButtonPressed: ActionCreator<SnakeTurnAction>,
+    onDownButtonPressed: ActionCreator<SnakeTurnAction>,
+    onLeftButtonPressed: ActionCreator<SnakeTurnAction>,
+    onRightButtonPressed: ActionCreator<SnakeTurnAction>,
 }
 interface OwnProps {
     rows: number,
@@ -31,15 +36,54 @@ const Playground: StatelessComponent<Props> =
                     <tbody>
                         {rows}
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colSpan={2}>
+                                <button onClick={props.onScoreButtonPressed}>
+                                    Score!
+                                </button>
+                            </td>
+                            <td colSpan={2} />
+                            <td colSpan={2}>
+                                <button onClick={props.onUpButtonPressed}>
+                                    Up
+                                </button>
+                            </td>
+                            <td colSpan={2} />
+                        </tr>
+                        <tr>
+                            <td colSpan={2} />
+                            <td colSpan={2}>
+                                <button onClick={props.onLeftButtonPressed}>
+                                    Left
+                                </button>
+                            </td>
+                            <td colSpan={2}>
+                                <button onClick={props.onCrawlButtonPressed}>
+                                    Crawl!
+                                </button>
+                            </td>
+                            <td colSpan={2}>
+                                <button onClick={props.onRightButtonPressed}>
+                                    Right
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan={2} />
+                            <td colSpan={2} />
+                            <td colSpan={2}>
+                                <button onClick={props.onDownButtonPressed}>
+                                    Down
+                                </button>
+                            </td>
+                            <td colSpan={2} />
+                        </tr>
+                    </tfoot>
                 </table>
-                <button onClick={() => {console.log('Tried to score');}}>
-                    Score!
-                </button>
-                <button onClick={props.onCrawlButtonPressed}>Crawl!</button>
-                <button onClick={props.onUpButtonPressed}>Up</button>
-                <button onClick={props.onDownButtonPressed}>Down</button>
-                <button onClick={props.onLeftButtonPressed}>Left</button>
-                <button onClick={props.onRightButtonPressed}>Right</button>
+
+
+
             </div>
         );
     };
@@ -50,6 +94,7 @@ Playground.propTypes = {
 };
 
 const mapDispatchToProps: MapDispatchToPropsObject = {
+    onScoreButtonPressed: score,
     onCrawlButtonPressed: crawl,
     onUpButtonPressed: up,
     onDownButtonPressed: down,

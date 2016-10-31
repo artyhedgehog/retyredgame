@@ -8,7 +8,7 @@ export interface Props {
 
 const Game: StatelessComponent<Props> = (props: Props): ReactElement<Props> => (
     <div>
-        <ScoreBoard score={0}/>
+        <ScoreBoard />
         <Playground columns={20} rows={10}/>
     </div>
 );
