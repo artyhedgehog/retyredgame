@@ -7,9 +7,13 @@ import PlaygroundRow, {Props as RowProps} from './PlaygroundRow';
 import {crawl, up, down, left, right} from '../actionCreators/snake';
 import {SnakeCrawlAction, SnakeTurnAction} from '../types/actions';
 import {score} from '../actionCreators/score';
+import {AppState} from "../types/state";
 
-
-interface MappedDispatchProps {
+interface StateProps {
+    rows: number,
+    columns: number,
+}
+interface DispatchProps {
     onScoreButtonPressed: ActionCreator<Action>,
     onCrawlButtonPressed: ActionCreator<SnakeCrawlAction>,
     onUpButtonPressed: ActionCreator<SnakeTurnAction>,
@@ -18,10 +22,8 @@ interface MappedDispatchProps {
     onRightButtonPressed: ActionCreator<SnakeTurnAction>,
 }
 interface OwnProps {
-    rows: number,
-    columns: number,
 }
-export interface Props extends OwnProps, MappedDispatchProps {}
+export interface Props extends OwnProps, DispatchProps, StateProps {}
 
 const Playground: StatelessComponent<Props> =
     (props: Props): ReactElement<Props> => {
@@ -88,11 +90,10 @@ const Playground: StatelessComponent<Props> =
         );
     };
 
-Playground.propTypes = {
-    rows: React.PropTypes.number.isRequired,
-    columns: React.PropTypes.number.isRequired,
-};
-
+const mapStateToProps = (state: AppState): StateProps => ({
+    rows: state.board.rows,
+    columns: state.board.columns,
+});
 const mapDispatchToProps: MapDispatchToPropsObject = {
     onScoreButtonPressed: score,
     onCrawlButtonPressed: crawl,
@@ -101,7 +102,7 @@ const mapDispatchToProps: MapDispatchToPropsObject = {
     onLeftButtonPressed: left,
     onRightButtonPressed: right,
 };
-export default connect<{}, MappedDispatchProps, OwnProps>(
-    () => ({}),
+export default connect<StateProps, DispatchProps, OwnProps>(
+    mapStateToProps,
     mapDispatchToProps
 )(Playground);

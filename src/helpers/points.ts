@@ -1,4 +1,4 @@
-import {Point, Movement} from '../types/models';
+import {Point, Movement, Boundaries} from '../types/models';
 import {Direction} from '../types/actions';
 
 export const samePoint = (one: Point, another: Point): boolean => (
@@ -36,3 +36,7 @@ export const applyMovement = (from: Point, move: Movement): Point => ({
     x: from.x + move.dX,
     y: from.y + move.dY,
 });
+
+export const isInBoundaries = (point: Point, {minX, maxX, minY, maxY}: Boundaries):
+    boolean => minX <= point.x && point.x <= maxX
+        && minY <= point.y && point.y <= maxY;
